@@ -25,6 +25,7 @@ export default function ColorSchemeToggler() {
           return;
         default:
           console.log("Ivalid value for darkMode in localStorage");
+          localStorage.removeItem("darkMode");
           break;
       }
     }

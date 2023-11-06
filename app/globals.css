@@ -8,10 +8,13 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   --blue: #1b9cfc;
+  --blue-5: rgba(29, 155, 252, 0.05);
   --blue-10: rgba(29, 155, 252, 0.1);
   --blue-20: rgba(29, 155, 252, 0.2);
-  --transition-colors: background-color 0.1s ease-in, color 0.1s ease-in;
+  --transition-colors: background-color 0.1s ease-in, color 0.1s ease-in,
+    border-color 0.1s ease-in;
   --dark: #1e272e;
+  --dark-90: rgba(30, 39, 46, 0.9);
 }
 
 * {
@@ -29,6 +32,11 @@ body {
   max-width: 680px;
   width: 100%;
   margin: 0 auto;
+}
+
+button,
+input {
+  outline: none;
 }
 
 button {
@@ -79,4 +87,39 @@ body.dark {
 .loader svg {
   width: 32px;
   height: 32px;
+}
+
+.p-4 {
+  padding: 1.5rem;
+}
+
+.animate {
+  animation: 0.3s fedeInKf linear;
+}
+
+.loading {
+  animation: 1s rotateKf infinite linear;
+}
+
+main {
+  display: grid;
+  gap: 48px;
+}
+
+@keyframes fedeInKf {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotateKf {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

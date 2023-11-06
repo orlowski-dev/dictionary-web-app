@@ -1,0 +1,29 @@
+.searchbar {
+  position: relative;
+  input {
+    transition: var(--transition-colors);
+    width: 100%;
+    font-size: 1.125rem;
+    padding: 0.625rem;
+    padding-right: 2.125rem;
+    border-radius: 0.625rem;
+    border: 2px solid var(--blue-10);
+    background-color: var(--blue-10);
+    color: var(--blue);
+
+    &:focus {
+      border-color: var(--blue);
+    }
+  }
+
+  .data-loading {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--blue);
+    position: absolute;
+    top: calc(50% - 12px);
+    right: 10px;
+  }
+}

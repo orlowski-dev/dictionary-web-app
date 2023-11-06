@@ -7,6 +7,7 @@ const plexSerif = IBM_Plex_Serif({
   subsets: ["latin-ext"],
   weight: ["400", "500", "700"],
   variable: "--plex-serif",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {

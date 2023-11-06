@@ -1,8 +1,11 @@
 .main-header {
-  padding: 1.5rem;
   position: sticky;
   top: 0;
   left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  transition: background-color 0.1s ease-in;
+  z-index: 9999;
 
   .container-680 {
     display: flex;
@@ -20,4 +23,8 @@
       font-weight: 500;
     }
   }
+}
+
+body.dark .main-header {
+  background-color: var(--dark-90);
 }
