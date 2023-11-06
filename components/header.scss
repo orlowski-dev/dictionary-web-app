@@ -1,0 +1,23 @@
+.main-header {
+  padding: 1.5rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  .container-680 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+
+    span {
+      font-weight: 500;
+    }
+  }
+}
