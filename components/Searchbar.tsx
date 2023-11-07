@@ -10,20 +10,26 @@ export default function Searchbar({
 }: {
   callback: (resData: IDictionaryData[] | null | undefined) => void;
 }) {
-  const serachParams = useSearchParams().get("word");
+  const searchParams = useSearchParams().get("word");
   const inputRef = useRef<HTMLInputElement>(null);
-  const [inputValue, setInputValue] = useState(serachParams || "");
+  const [inputValue, setInputValue] = useState(searchParams || "");
   const [dataLoading, setDataLoading] = useState(false);
   const [lastWord, setLastWord] = useState<undefined | string>(undefined);
   const [redirectTo, setRedirectTo] = useState<null | string>(null);
 
   useEffect(() => {
-    if (!window || !serachParams || serachParams.length === 0) return;
+    if (
+      !window ||
+      !searchParams ||
+      searchParams.length === 0 ||
+      !RegExp(/^[a-zA-Z]+$/).test(searchParams)
+    )
+      return;
 
     setDataLoading(true);
     callback(null);
 
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${serachParams}`)
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchParams}`)
       .then((res) => {
         if (!res.ok) return undefined;
         return res.json();
@@ -31,9 +37,9 @@ export default function Searchbar({
       .then((data) => {
         callback(data);
         setDataLoading(false);
-        setLastWord(serachParams);
+        setLastWord(searchParams);
       });
-  }, [serachParams, callback]);
+  }, [searchParams, callback]);
 
   if (redirectTo) redirect(redirectTo);
 
@@ -72,6 +78,7 @@ export default function Searchbar({
           ref={inputRef}
           defaultValue={inputValue}
           onChange={handleOnInputChange}
+          placeholder="Enter a word.."
         />
         {dataLoading && (
           <span className="data-loading loading">

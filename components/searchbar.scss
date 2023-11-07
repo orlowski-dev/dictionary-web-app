@@ -11,6 +11,10 @@
     background-color: var(--blue-10);
     color: var(--blue);
 
+    &::placeholder {
+      color: var(--blue-20);
+    }
+
     &:focus {
       border-color: var(--blue);
     }
