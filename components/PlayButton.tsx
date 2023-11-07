@@ -8,14 +8,16 @@ export default function PlayButton({
 }: {
   audioArr: { audio: string }[];
 }) {
-  const foundAudio = audioArr.filter((audioArr) => audioArr.audio.length !== 0);
+  const foundAudio = audioArr.filter(
+    (audioArr) => audioArr.audio && audioArr.audio.length !== 0
+  );
   const audioElemRef = useRef<HTMLAudioElement>(null);
 
-  if (!foundAudio) return undefined;
+  if (!foundAudio || !foundAudio[0]) return undefined;
 
   return (
     <>
-      <audio ref={audioElemRef} src={foundAudio[0].audio} />
+      <audio ref={audioElemRef} src={foundAudio[0]?.audio || undefined} />
       <button
         title="Play"
         onClick={() => {

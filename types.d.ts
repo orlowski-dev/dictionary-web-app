@@ -15,4 +15,6 @@ type IDictionaryData = {
     synonyms?: string[];
     antonyms?: string[];
   }[];
+  license: { name: string; url: string };
+  sourceUrls: string[];
 };

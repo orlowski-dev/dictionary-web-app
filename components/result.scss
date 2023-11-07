@@ -49,4 +49,37 @@
     border-radius: 0.625rem 0.625rem 0 0;
     color: var(--blue);
   }
+
+  .links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    flex-flow: column;
+    span {
+      display: block;
+      color: var(--blue);
+      font-weight: bold;
+    }
+    a {
+      color: var(--dark-1);
+      font-size: 0.75rem;
+    }
+  }
+
+  .syn-ant {
+    p {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+
+      a {
+        color: var(--dark-1);
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }

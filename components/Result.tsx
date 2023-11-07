@@ -1,5 +1,13 @@
+import Link from "next/link";
 import PlayButton from "./PlayButton";
 import "./result.scss";
+
+const arrToStr = (arr: string[]) =>
+  arr.map((elem, index: number) => (
+    <Link key={index} href={`/?word=${elem}`}>
+      {elem}
+    </Link>
+  ));
 
 export default function Result({ data }: { data: IDictionaryData[] }) {
   return (
@@ -31,30 +39,51 @@ export default function Result({ data }: { data: IDictionaryData[] }) {
                     )}
                     {def.synonyms[0] && (
                       <div className="syn-ant">
-                        <p>Synonyms</p>
-                        <ul>
-                          {def.synonyms.map((synonym, index: number) => (
-                            <li key={index}>{synonym}</li>
-                          ))}
-                        </ul>
+                        <h4>synonyms</h4>
+                        <p>{arrToStr(def.synonyms)}</p>
+                      </div>
+                    )}
+                    {def.antonyms[0] && (
+                      <div className="syn-ant">
+                        <h4>antonyms</h4>
+                        <p>{arrToStr(def.antonyms)}</p>
                       </div>
                     )}
                   </div>
                 ))}
                 {meaning.synonyms?.length !== 0 && (
-                  <div className="def-n-exmp">
+                  <div className="def-n-exmp syn-ant">
                     <h4>synonyms</h4>
-                    <p>{meaning.synonyms?.toString().replaceAll(",", ", ")}</p>
+                    <p>{meaning.synonyms && arrToStr(meaning.synonyms)}</p>
                   </div>
                 )}
                 {meaning.antonyms?.length !== 0 && (
-                  <div className="def-n-exmp">
+                  <div className="def-n-exmp syn-ant">
                     <h4>antonyms</h4>
-                    <p>{meaning.antonyms?.toString().replaceAll(",", ", ")}</p>
+                    <p>{meaning.antonyms && arrToStr(meaning.antonyms)}</p>
                   </div>
                 )}
               </div>
             ))}
+          </article>
+          <article style={{ padding: 10 }}>
+            <div className="def-n-exmp">
+              <h4>license and sources</h4>
+              <p className="links">
+                <span>license</span>
+                <Link href={elem.license?.url} target="_blank">
+                  {elem.license?.name}
+                </Link>
+              </p>
+              <p className="links">
+                <span>source list</span>
+                {elem.sourceUrls.map((link, index: number) => (
+                  <Link key={index} href={link} target="_blank">
+                    {elem.sourceUrls}
+                  </Link>
+                ))}
+              </p>
+            </div>
           </article>
         </section>
       ))}
