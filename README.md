@@ -19,6 +19,6 @@
 
 ## Links
 
-- [https://dictionaryapi.dev/](Free Dictionary API)
-- [https://nextjs.org/](NEXT.js)
-- [https://react.dev/](React)
+- [Free Dictionary API](https://dictionaryapi.dev/)
+- [NEXT.js](https://nextjs.org/)
+- [React](https://react.dev/)
