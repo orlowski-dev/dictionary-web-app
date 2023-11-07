@@ -15,6 +15,7 @@
     border-color 0.1s ease-in;
   --dark: #1e272e;
   --dark-90: rgba(30, 39, 46, 0.9);
+  --red: #ff3f34;
 }
 
 * {

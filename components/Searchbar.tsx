@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { RiLoader5Fill } from "react-icons/ri";
+import { RiLoader5Fill, RiSearchLine } from "react-icons/ri";
 import "./searchbar.scss";
 import { redirect, useSearchParams } from "next/navigation";
 
@@ -10,14 +10,15 @@ export default function Searchbar({
 }: {
   callback: (resData: IDictionaryData[] | null | undefined) => void;
 }) {
+  const serachParams = useSearchParams().get("word");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState(serachParams || "");
   const [dataLoading, setDataLoading] = useState(false);
   const [lastWord, setLastWord] = useState<undefined | string>(undefined);
-  const serachParams = useSearchParams().get("word");
   const [redirectTo, setRedirectTo] = useState<null | string>(null);
 
   useEffect(() => {
-    if (!serachParams || serachParams.length === 0) return;
+    if (!window || !serachParams || serachParams.length === 0) return;
 
     setDataLoading(true);
     callback(null);
@@ -36,6 +37,16 @@ export default function Searchbar({
 
   if (redirectTo) redirect(redirectTo);
 
+  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInputValue(value);
+    if (value.length < 2 || !RegExp(/^[a-zA-Z]+$/).test(value)) {
+      inputRef.current?.classList.add("invalid");
+    } else {
+      inputRef.current?.classList.remove("invalid");
+    }
+  };
+
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const inputValue = inputRef.current?.value;
@@ -51,11 +62,6 @@ export default function Searchbar({
     inputRef.current.readOnly = true;
     // getData(inputValue);
     setRedirectTo(`/?word=${inputValue}`);
-
-    // cooldown
-    setTimeout(() => {
-      if (inputRef.current) inputRef.current.readOnly = false;
-    }, 2000);
   };
 
   return (
@@ -64,11 +70,17 @@ export default function Searchbar({
         <input
           type="text"
           ref={inputRef}
-          defaultValue={serachParams || undefined}
+          defaultValue={inputValue}
+          onChange={handleOnInputChange}
         />
         {dataLoading && (
           <span className="data-loading loading">
             <RiLoader5Fill />
+          </span>
+        )}
+        {!dataLoading && (
+          <span className="search-icon">
+            <RiSearchLine />
           </span>
         )}
       </div>
